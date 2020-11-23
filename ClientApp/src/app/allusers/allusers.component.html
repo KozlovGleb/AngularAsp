@@ -1,0 +1,25 @@
+
+<h1 id="tableLabel">Список пользователей</h1>
+
+
+<p *ngIf="!user"><em>Loading...</em></p>
+<div class="search-hero">
+  <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="&#61442;  Найдите пользователя по имени или телефону">
+</div>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="user">
+  <thead>
+    <tr>
+      <th>Имя</th>
+      <th>Год рождения</th>
+      <th>Телефонный номер</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of user | filter:searchText">
+      <td>{{ user.name }}</td>
+      <td>{{ user.yearOfBirth }}</td>
+      <td>{{ user.phoneNumber }}</td>
+      <td><button class="btn btn-default" [routerLink]="['/usercart',user.id]">Изменить</button></td>
+    </tr>
+  </tbody>
+</table>

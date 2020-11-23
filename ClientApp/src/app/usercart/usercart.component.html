@@ -1,0 +1,46 @@
+<p *ngIf="!user"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="user">
+  <thead>
+    <tr>
+      <th>Имя(кириллица)</th>
+      <th>Год рождения(1900-2020)</th>
+      <th>Телефонный номер(10-12 цифр)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <td>
+    <div class="form-group">
+        
+            <input type="text" name="name" [(ngModel)]="user.name" class="form-control" #amount="ngModel" #name="ngModel" required  pattern="^[А-Яа-яЁё\\s]+$" />
+        
+        <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+            Неверно указано имя
+          </div>
+       
+    </div>
+</td>
+<td>
+    <div class="form-group">
+        
+            <input type="number" name ="yearOfBirth" [(ngModel)]="user.yearOfBirth" class="form-control" #yearOfBirth="ngModel" required  pattern="^[0-9]*$" />
+        <div [hidden]="yearOfBirth.valid || yearOfBirth.untouched" class="alert alert-danger">
+            Некорректная дата
+          </div>
+        
+    </div>
+</td>
+        <td>
+              <div class="form-group">
+            <input type="text"  name ="phoneNumber" [(ngModel)]="user.phoneNumber" class="form-control" #phoneNumber="ngModel" required  pattern="[0-9]{10,12}" />
+            <div [hidden]="phoneNumber.valid || phoneNumber.untouched" class="alert alert-danger">
+                Некорректный номер телефона
+              </div>
+              </div>
+        </td>
+        <td>
+            <input type="button" [disabled]="name.invalid || yearOfBirth.invalid || phoneNumber.invalid" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
+            <button class="btn btn-sm btn-danger" [disabled]="name.invalid || yearOfBirth.invalid || phoneNumber.invalid" (click)="delete(user)">Удалить</button>
+        </td>
+  </tbody>
+</table>
